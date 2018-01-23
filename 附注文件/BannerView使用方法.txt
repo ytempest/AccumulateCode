@@ -1,0 +1,54 @@
+一、在 XML 中添加下面代码
+<com.ytempest.bannerviewdemo.binnerview.BannerView
+	android:id="@+id/banner_view"
+	android:layout_width="match_parent"
+	app:dotSize="8dp"
+	app:dotDistance="4dp"
+	app:dotGravity="center"
+	app:widthProportion="20"
+	app:heightProportion="7"
+	app:bannerTextSize="13sp"
+	app:bannerTextColor="@android:color/black"
+	app:bottomColor="@color/banner_bottom_bar_bg_day"
+	app:dotSelectColor="@color/dot_select_color"
+	app:dotNormalColor="@color/dot_normal_color"
+	android:layout_height="0dp"/>
+
+
+
+二、在 Activity 中添加一下代码：
+mBannerView.setAdapter(new BannerAdapter() {
+	@Override
+	public View getView(int position, View convertView) {
+		if(convertView == null){
+			convertView = new ImageView(MainActivity.this);
+		}
+		ImageView imageView = (ImageView) convertView;
+		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		imageView.setBackgroundResource(mBannerImages[position]);
+		return convertView;
+	}
+
+	@Override
+	public int getCount() {
+		return mBannerImages.length;
+	}
+
+	@Override
+	public String getBannerText(int position) {
+		return mBannerText[position];
+	}
+});
+
+mBannerView.setOnBannerItemClickListener(new BannerViewPager.BannerItemClickListener() {
+	@Override
+	public void onPageClick(int position) {
+		Toast.makeText(MainActivity.this, "you click " + mBannerText[position], Toast.LENGTH_SHORT).show();
+	}
+});
+
+
+三、注意事项：
+（1）如果不需要显示 底部View 就别在 XML 中设置 bottomColor 的颜色就可以了
+（2）如果不需要显示 底部文字，就别在代码中重写 getBannerText(int position) 方法就可以了
+

@@ -1,0 +1,70 @@
+
+// 在BaseApplication设置全部异常捕捉类
+ExceptionCrashHandler.getInstance().init(this);
+
+
+// 在需要的地方进行读写
+File crashFile = ExceptionCrashHandler.getInstance().getCrashFile();
+if (crashFile.exists()) {
+	// 上传到服务器
+
+	try {
+		InputStreamReader fileReader = new InputStreamReader(new FileInputStream(crashFile));
+		char[] buffer = new char[1024];
+		int len = 0;
+		StringWriter s = new StringWriter();
+		while ((len = fileReader.read(buffer)) != -1) {
+			s.write(buffer, 0, len);
+		}
+		Log.e(TAG, "crashFile --> " + s.toString());
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+
+
+打印结果（即生成的文件的内容）：
+11-20 20:13:11.832 2261-2261/com.ytempest.test2 E/MainActivity: crashFile --> SDK_INT = 23
+                                                                versionName = 1.0
+                                                                versionCode = 1
+                                                                MOBILE_INFO = BOARD = MSM8974
+                                                                BOOTLOADER = unknown
+                                                                BRAND = Xiaomi
+                                                                CPU_ABI = armeabi-v7a
+                                                                CPU_ABI2 = armeabi
+                                                                DEVICE = cancro
+                                                                DISPLAY = MMB29M
+                                                                FINGERPRINT = Xiaomi/cancro_wc_lte/cancro:6.0.1/MMB29M/V8.1.3.0.MXDCNDI:user/release-keys
+                                                                HARDWARE = qcom
+                                                                HOST = c3-miui-ota-bd43
+                                                                ID = MMB29M
+                                                                IS_DEBUGGABLE = false
+                                                                MANUFACTURER = Xiaomi
+                                                                MODEL = MI 4LTE
+                                                                PRODUCT = cancro_wc_lte
+                                                                RADIO = unknown
+                                                                SERIAL = a30e4230
+                                                                SUPPORTED_32_BIT_ABIS = [Ljava.lang.String;@99f4099
+                                                                SUPPORTED_64_BIT_ABIS = [Ljava.lang.String;@dd34f5e
+                                                                SUPPORTED_ABIS = [Ljava.lang.String;@5db9f3f
+                                                                TAG = Build
+                                                                TAGS = release-keys
+                                                                TIME = 1478606340000
+                                                                TYPE = user
+                                                                UNKNOWN = unknown
+                                                                USER = builder
+                                                                
+                                                                MODEL = MI 4LTE
+                                                                product = cancro_wc_lte
+                                                                java.lang.ArithmeticException: divide by zero
+                                                                    at com.ytempest.test2.MainActivity$3.onClick(MainActivity.java:179)
+                                                                    at android.view.View.performClick(View.java:5207)
+                                                                    at android.view.View$PerformClick.run(View.java:21177)
+                                                                    at android.os.Handler.handleCallback(Handler.java:739)
+                                                                    at android.os.Handler.dispatchMessage(Handler.java:95)
+                                                                    at android.os.Looper.loop(Looper.java:148)
+                                                                    at android.app.ActivityThread.main(ActivityThread.java:5438)
+                                                                    at java.lang.reflect.Method.invoke(Native Method)
+                                                                    at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:739)
+                                                                    at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:629)

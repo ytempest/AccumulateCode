@@ -1,0 +1,11 @@
+init(Context)&void：设置本类为全局异常类
+		uncaughtException(Thread, Throwable)&void：出现异常的时候会先调用这个类	
+				saveInfoToSD(Throwable)&String：保存所有崩溃的信息到txt文件中，return:这个文件的绝对路径名
+						obtainSimpleInfo(Context)&HaspHash：获取手机信息，版本信息，保存到haspMap中并返回
+								getMobileInfo()&String：从Build类中获取相关信息
+						getAssingnTime(String)&String：根据传入的字符串格式化时间,return:格式化后的时间
+				cacheCrashFile(String)&void：将缓存了崩溃的日志信息的txt文件的绝对路径保存到sp
+				
+getInstance()&ExceptionCrashHandler：单例模式
+
+getCrashFile()&File：获取缓存了崩溃信息的txt文件

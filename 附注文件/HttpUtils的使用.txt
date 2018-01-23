@@ -1,0 +1,28 @@
+测试的URL
+http://is.snssdk.com/2/essay/discovery/v3/?iid=61525517598&channel=360&aid=7&app_name=oke_essay&version_name=5.7.0&ac=wifi&device_id=30036118478&device_brand=Xiaomi&update_version_code=5701&manifest_version_code=570&longitude=113.000366&latitude=28.171377&device_platform=android
+
+http://api.ximalaya.com/categories/list?app_key=b90545b0ff18ac24bc6c10fd7bcb9fa3&client_os_type=3&device_id=myweb&pack_id=com.ximalaya&access_token=f299e2d8e4cf8f0c43d80854d0f6e364&sig=44eede9936f8572ee1eb91894be14521
+
+
+可以在 BaseApplication中先注册 HttpUtils 的默认网络引擎：
+HttpUtils.init(new OkHttpEngine());
+
+使用示例：
+HttpUtils.with(MainActivity.this).url("http://is.snssdk.com/2/essay/discovery/v3/?iid=61525517598&channel=360&aid=7" +
+	"&app_name=oke_essay&version_name=5.7.0&ac=wifi&device_id=30036118478&device_brand=Xiaomi&update_version_code=5701&manifest_version_code=570&longitude=113.000366&latitude=28.171377&device_platform=android")
+	.get()
+	.exchangeEngine(new OkHttpEngine())
+	.execute(new HttpCallBack<Discovery>() {
+		@Override
+		public void onPreExecute() {		
+		}
+		
+		@Override
+		public void onError(Exception e) {
+		}
+		
+		@Override
+		public void onSuccess(Discovery result) {
+			Log.e(TAG, "请求数据 --> " + result.getMessage());
+		}
+	});

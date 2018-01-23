@@ -1,0 +1,15 @@
+DefaultNavigationBar navigationBar = new DefaultNavigationBar.Builder(this)
+		.setTitle("投稿")
+		.setRightText("发表")
+		.setRightClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showToastShort("你点击了发表");
+			}
+		})
+		.builder();
+
+DefaultNavigationBar navigationBar = new DefaultNavigationBar.Builder(this, (ViewGroup) findViewById(R.id.rl_nav))
+		.setTitle("投稿")
+		.setRightText("发表")
+		.builder();

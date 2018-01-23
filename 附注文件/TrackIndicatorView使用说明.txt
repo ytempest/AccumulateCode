@@ -1,0 +1,82 @@
+1. 现在布局文件添加 View
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<!-- tabVisibleNums指定一个屏幕显示的条目数量 -->
+		<com.ytempest.baselibrary.indicator.TrackIndicatorView
+			android:id="@+id/indicator_view"
+			app:tabVisibleNums="6"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
+
+		<android.support.v4.view.ViewPager
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:id="@+id/view_pager"
+			android:layout_weight="1" />
+	</LinearLayout>
+
+	
+2. 在 Activity 中使用
+	mTrackIndicatorView.setAdapter(new IndicatorAdapter() {
+		/**
+		 * 添加底部跟踪的下标
+		 */
+		@Override
+		public View getBottomTrackView() {
+			View view = new View(MainActivity.this);
+			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+			view.setBackgroundColor(Color.GREEN);
+			view.setLayoutParams(params);
+			return view;
+		}
+
+		@Override
+		public int getCount() {
+			return items.length;
+		}
+
+		@Override
+		public View getView(int position, ViewGroup parent) {
+			TextView textView = new TextView(MainActivity.this);
+			textView.setTextSize(20);
+			textView.setGravity(Gravity.CENTER);
+			textView.setTextColor(Color.GRAY);
+			textView.setText(mItems[position]);
+			int padding = 20;
+			textView.setPadding(padding, padding, padding, padding);
+			return textView;
+		}
+
+		/**
+		 * 重置当前位置
+		 *
+		 * @param view
+		 */
+		@Override
+		public void restoreIndicator(View view) {
+			TextView tv = (TextView) view;
+			tv.setTextColor(Color.GRAY);
+		}
+
+		/**
+		 * 高亮当前位置
+		 *
+		 * @param view
+		 */
+		@Override
+		public void highLightIndicator(View view) {
+			TextView tv = (TextView) view;
+			tv.setTextColor(Color.BLACK);
+		}
+	}, mViewPager);
+
+		
+		
+		
+		

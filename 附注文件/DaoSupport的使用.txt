@@ -1,0 +1,35 @@
+// 获取数据库引擎
+IDaoSupport daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+
+
+@OnClick(R.id.bt_add)
+private void btAddClick(Button btAdd) {
+	List<Person> lists = new ArrayList<Person>();
+	for (int i = 0; i < 10; i++) {
+		lists.add(new Person(i, (char) (65 + i) + "", "Student"));
+	}
+	daoSupport.insert(lists);
+}
+
+@OnClick(R.id.bt_delete)
+private void btDeleteClick(Button btDelete) {
+	daoSupport.delete("error_no<?", "5");
+}
+
+@OnClick(R.id.bt_update)
+private void btUpdateClick(Button btUpdate) {
+	Person person = new Person(100, "Mike", "Teacher");
+	daoSupport.update(person, "no>? and no<?", new String[]{"2", "6"});
+	// 或者：daoSupport.update(person, "no>2 and no<6", null);
+
+}
+
+@OnClick(R.id.bt_select)
+private void btSelectClick(Button btSelect) {
+	List<Person> lists = daoSupport.getQuerySupport().queryAll();
+	for (Person person : lists) {
+		Log.e(TAG, "" + person.getNo());
+		Log.e(TAG, "" + person.getName());
+		Log.e(TAG, "" + person.getJob() + "\n\n");
+	}
+}

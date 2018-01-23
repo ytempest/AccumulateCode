@@ -1,0 +1,26 @@
+（1）在 BaseApplication 中添加以下代码
+// 初始化皮肤管理器
+SkinManager.getInstance().init(this);
+
+
+（2）在点击换肤的位置添加：
+	private void click(View View) {
+		String skinPath = Environment.getExternalStorageDirectory().getAbsolutePath()
+				+ File.separator + "red.skin";
+		// 换肤
+		int result = SkinManager.getInstance().loadSkin(skinPath);
+		Log.e(TAG, "btOneClick: result --> " + result);
+	}
+
+	private void click(View View) {
+        // 恢复默认
+        int result = SkinManager.getInstance().restoreDefault();
+    }
+
+
+
+（3）对自定义 View 的兼容处理，重写这个方法实现自定义 view 换肤
+@Override
+public void changeSkin(SkinResource skinResource) {
+	// TODO
+}

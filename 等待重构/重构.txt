@@ -1,0 +1,16 @@
+1. baselibrary的util的FileUtils
+	需要对deleteDir(File dir)和deleteFileInDir(File dir)方法进行测试和优化
+
+2. 编写一个实现获取手机和apk所有信心的Utils类
+
+3. baselibrary的exception的ExceptionCrashHandler
+	在方法中使用硬编码的一些字符时候需要提取或者进行优化
+	
+4. 
+
+
+
+
+-----------------------------------------
+编写规范
+1. 可以参考Build类
