@@ -16,11 +16,11 @@
         android:layout_marginRight="75.0dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_right_text"
-        android:visibility="gone"
         style="@style/navigation_right_text_style"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:visibility="gone" />
 </RelativeLayout>
